@@ -6,9 +6,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
-// HTML files to copy
-const htmlFiles = ['index.html'];
-
 // Static asset folders to copy (preserving m/ folder structure)
 const staticFolders = ['f', 'i', 'u'];
 
@@ -16,6 +13,12 @@ const staticFolders = ['f', 'i', 'u'];
 const distDir = path.join(rootDir, 'dist');
 if (!fs.existsSync(distDir)) {
   fs.mkdirSync(distDir, { recursive: true });
+}
+
+// Dynamically find all HTML files in root directory
+function findHtmlFiles() {
+  const files = fs.readdirSync(rootDir);
+  return files.filter(file => file.endsWith('.html'));
 }
 
 // Helper function to recursively copy directory
@@ -52,6 +55,14 @@ function copyDirectoryRecursive(src, dest, excludeDirs = []) {
 }
 
 console.log('\n📄 Copying HTML files to dist...\n');
+
+const htmlFiles = findHtmlFiles();
+
+if (htmlFiles.length === 0) {
+  console.warn('  ⚠️  No HTML files found in root directory');
+} else {
+  console.log(`  Found ${htmlFiles.length} HTML file(s)\n`);
+}
 
 htmlFiles.forEach(file => {
   const srcPath = path.join(rootDir, file);
