@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
 // HTML files to copy
-const htmlFiles = ['index.html', 'about.html', 'test.html'];
+const htmlFiles = ['index.html'];
 
 // Static asset folders to copy (preserving m/ folder structure)
 const staticFolders = ['f', 'i', 'u'];
