@@ -11,6 +11,11 @@ obj
 /m/js/pre.min.js.map
 yarn.lock
 
+# Test/example files (not part of boilerplate)
+/m/f/*.woff
+/m/f/*.woff2
+/m/u/offers/
+
 # Vite
 .vite
 dist
