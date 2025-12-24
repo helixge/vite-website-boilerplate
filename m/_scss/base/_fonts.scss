@@ -1,0 +1,16 @@
+$fonts:
+    'Font Family' 'path1' weight1 style1,
+	'Font Family' 'path2' weight2 style2;
+	
+
+@each $font in $fonts {
+    @font-face {
+        font-family: nth($font, 1);
+        src: url(nth($font, 2) + '.woff2') format("woff2"),
+             url(nth($font, 2) + '.woff') format("woff")
+             url(nth($font, 2) + '.format') format("format");
+        font-weight: nth($font, 3);
+        font-style: nth($font, 4);
+        font-display: swap;
+    }
+}

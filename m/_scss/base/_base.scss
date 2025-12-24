@@ -1,0 +1,19 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: green;
+    
+    &.noscroll {
+        overflow-y: hidden;
+    }
+
+}
+
+.main {
+    flex: 1 0 auto;
+}

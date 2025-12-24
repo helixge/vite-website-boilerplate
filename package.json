@@ -1,0 +1,41 @@
+{
+  "name": "helixboilerplate",
+  "version": "2.0.0",
+  "description": "Modern web boilerplate with Vite, SCSS, Vue, and Bootstrap",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "html": "node build-tools/build-html.js",
+    "html:watch": "node build-tools/watch-html.js",
+    "html:prod": "cross-env BUILD_MODE=production node build-tools/build-html.js",
+    "copy:dist": "node build-tools/copy-to-dist.js",
+    "dev": "npm run html && vite",
+    "dev:watch": "concurrently \"npm run html:watch\" \"vite\"",
+    "build": "npm run build:prod",
+    "build:dev": "npm run html && vite build --mode development && npm run copy:dist",
+    "build:prod": "npm run html:prod && vite build --mode production && npm run copy:dist",
+    "preview": "vite preview",
+    "verify": "node build-tools/verify-vite-build.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": ">=1.13.2",
+    "bootstrap": "^5.3.8",
+    "core-js": "^3.39.0",
+    "regenerator-runtime": "^0.14.1",
+    "swiper": "^12.0.3",
+    "vue": "^3.5.25"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "fast-glob": "^3.3.3",
+    "handlebars": "^4.7.8",
+    "sass": "^1.94.2",
+    "terser": "^5.36.0",
+    "vite": "^5.4.11",
+    "vite-plugin-svg-icons": "^2.0.1"
+  }
+}

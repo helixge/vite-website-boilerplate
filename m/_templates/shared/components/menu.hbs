@@ -1,0 +1,12 @@
+<nav class="main-menu">
+    <ul>
+        {{#each menuItems}}
+        <li class="{{#if active}}active{{/if}}">
+            <a href="{{url}}">{{label}}</a>
+        </li>
+        {{/each}}
+    </ul>
+</nav>
+
+
+

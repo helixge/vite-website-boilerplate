@@ -1,0 +1,37 @@
+node_modules
+m/_vendor
+bin
+obj
+.vs
+/m/_scss/_sprites.scss
+/m/css/site.min.css
+/m/js/post.min.js
+/m/js/post.min.js.map
+/m/js/pre.min.js
+/m/js/pre.min.js.map
+yarn.lock
+
+# Vite
+.vite
+dist
+*.local
+
+# Generated HTML files from templates
+/*.html
+!m/_templates/**/*.html
+
+# Polyfills (not needed)
+/m/js/polyfills*.js
+/m/js/polyfills*.map
+
+# CommonJS helpers and other generated chunks
+/m/js/_commonjsHelpers*.js
+/m/js/_commonjsHelpers*.map
+/m/js/index.min.js
+/m/js/index.min.js.map
+/m/js/about.min.js
+/m/js/about.min.js.map
+/m/js/test.min.js
+/m/js/test.min.js.map
+/m/js/site.min.min.js
+/m/js/site.min.min.js.map

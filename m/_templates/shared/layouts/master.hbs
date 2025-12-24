@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{{pageTitle}} - {{siteName}}</title>
+
+    <!-- Assets -->
+    <link rel="stylesheet" href="{{cssPath}}" />
+    <script type="module" src="{{preJsPath}}"></script>
+</head>
+<body class="{{pageCssClass}}">
+    {{> header}}
+    {{> menu}}
+    
+    <main class="main">
+        {{{body}}}
+    </main>
+
+    {{> footer}}
+    
+    <script type="module" src="{{postJsPath}}"></script>
+</body>
+</html>
+

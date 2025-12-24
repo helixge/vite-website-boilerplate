@@ -1,0 +1,89 @@
+---
+pageTitle: Homepage
+pageCssClass: homepage
+lang: en
+---
+
+<section class="hero">
+    <h1>Welcome to {{siteName}}!</h1>
+    <p>Modern web development with Vite + Handlebars</p>
+</section>
+
+<section class="info">
+    <p>Built at: {{buildTime}}</p>
+    <p>Year: {{year}}</p>
+    <p>by {{author}}</p>
+</section>
+
+<section class="demo">
+    <h2>Swiper Demo</h2>
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
+<section class="features">
+    <h2>Features</h2>
+    <svg class="icon icon-heart" style="width: 32px; height: 32px; fill: red;">
+        <use xlink:href="#icon-symbol-heart"></use>
+    </svg>
+    <svg class="icon icon-heart" style="width: 32px; height: 32px; fill: currentColor;">
+        <use xlink:href="#icon-symbol-arrow"></use>
+    </svg>
+    <ul>
+        <li>Template inheritance with master.hbs</li>
+        <li>Partials for components</li>
+        <li>Auto-rebuild on changes</li>
+        <li>Hot module replacement</li>
+    </ul>
+</section>
+
+<script type="module">
+// Wait for Swiper to be available (loaded by post.js)
+function initSwiper() {
+    const swiperElement = document.querySelector('.swiper');
+    if (swiperElement && window.Swiper) {
+        new window.Swiper('.swiper', {
+            // When using swiper/bundle, all modules are included - no need to specify them
+            // Optional parameters
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            // Pagination
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            // Other options
+            speed: 400,
+            spaceBetween: 30,
+        });
+        console.log('Swiper initialized');
+    } else if (!window.Swiper) {
+        console.log('Waiting for Swiper to load...');
+        setTimeout(initSwiper, 50);
+    }
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSwiper);
+} else {
+    initSwiper();
+}
+</script>
+
