@@ -1,166 +1,219 @@
-# Modern Web Boilerplate
+# Vite Website Boilerplate
 
-Modern static website boilerplate with Vite, Handlebars templating, and SCSS.
+A minimal, production-ready static website boilerplate with Vite, Handlebars templating, SCSS, and Vue 3 support.
 
-## ⚡ Quick Start
+## ✨ Features
+
+- ⚡ **Vite** - Lightning-fast HMR and optimized builds
+- 📝 **Handlebars** - Template inheritance with layouts and partials
+- 🎨 **SCSS** - Modular architecture with Bootstrap 5
+- 🖼️ **Vue 3** - Ready for interactive components
+- 📦 **Smart Bundling** - Pre/post load splitting
+- 🔄 **Auto-rebuild** - Templates regenerate on save
+- 🌐 **Production Ready** - Relative paths work anywhere
+- 🎯 **Dynamic Build** - Auto-copies all HTML files
+
+## 🚀 Quick Start
 
 ```bash
 # Install dependencies
 npm install
 
-# Start development server with auto-rebuild
+# Development with auto-rebuild (recommended)
 npm run dev:watch
+
+# Or just development server
+npm run dev
 ```
 
-Opens at http://localhost:3000 with:
-- ✨ Hot Module Replacement for JS
-- 🔄 Auto-rebuild HTML from templates  
-- 🎨 Auto-compile SCSS
+Opens at `http://localhost:3000` with hot module replacement.
 
-## 🎯 Commands
+## 📋 Commands
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev:watch` | Dev server + template watch ⭐ recommended for development |
+| `npm run dev:watch` | 🔥 Dev server + template watch (recommended) |
 | `npm run dev` | Dev server only |
 | `npm run html` | Build HTML from templates |
-| `npm run build` | Alias for `build:prod` (default production build) |
-| `npm run build:dev` | 🐛 **Development build** - Unminified, keeps debugger/console |
-| `npm run build:prod` | 🚀 **Production build** - Minified, removes debugger/console |
-| `npm run preview` | Preview built files locally with web server |
-| `npm run verify` | Verify build output |
+| `npm run html:prod` | Build HTML with production paths |
+| `npm run build` | Production build (relative paths) |
+| `npm run build:dev` | Development build (absolute paths) |
+| `npm run preview` | Preview production build |
 
-### Build Modes Explained
+### Build Modes
+
+**Production Build** (`npm run build`):
+- ✅ Relative paths (`./m/css/...`) - works anywhere
+- ✅ Minified with Terser
+- ✅ Console logs removed
+- 🚀 Ready for deployment
 
 **Development Build** (`npm run build:dev`):
-- ❌ No minification
-- ✅ Keeps `debugger` statements
-- ✅ Keeps `console.log()` statements  
-- 📦 Larger file sizes (~2-3x production)
-- 🐛 Good for debugging built code
-- ⚠️ **Not for deployment**
-
-**Production Build** (`npm run build:prod` or `npm run build`):
-- ✅ Full minification with Terser
-- ❌ Removes `debugger` statements
-- ❌ Removes `console.log()` statements
-- 📦 Optimized file sizes
-- 🚀 **Ready for deployment**
-
-**Preview Server** (`npm run preview`):
-- Use after building to test the dist folder
-- Serves files with proper paths (unlike opening `file://` directly)
-- Works with both dev and prod builds
+- ⚠️ Absolute paths (`/m/css/...`) - needs server
+- ⚠️ Unminified
+- ⚠️ Console logs kept
+- 🐛 For debugging only
 
 ## 📁 Project Structure
 
 ```
-project/
-├── vite.config.js              # Vite configuration
-├── package.json
-├── build-tools/                # Build scripts
-│   ├── build-html.js          # Template builder
-│   ├── watch-html.js          # Template watcher
-│   └── verify-vite-build.js   # Build verification
+vite-website-boilerplate/
+├── build-tools/              # Build scripts
+│   ├── build-html.js        # Handlebars compiler
+│   ├── watch-html.js        # Template watcher
+│   └── copy-to-dist.js      # Asset copier (auto-finds HTML)
 │
 ├── m/
-│   ├── _templates/            # Source templates ✏️
-│   │   ├── index.hbs         # Homepage template
-│   │   ├── about.hbs         # About page template
-│   │   ├── template-data.js  # ⭐ Data for all templates
+│   ├── _templates/          # Handlebars templates
+│   │   ├── index.hbs       # Example homepage
+│   │   ├── template-data.js # ⭐ Template data config
 │   │   └── shared/
 │   │       ├── layouts/
-│   │       │   └── master.hbs  # Master layout
+│   │       │   └── master.hbs    # Master layout
 │   │       └── components/
 │   │           ├── header.hbs
 │   │           ├── footer.hbs
 │   │           └── menu.hbs
 │   │
-│   ├── _scss/                 # SCSS source
+│   ├── _scss/              # SCSS source
+│   │   ├── abstracts/
+│   │   ├── base/
+│   │   ├── components/
+│   │   ├── layout/
+│   │   ├── pages/
 │   │   └── site.min.scss
 │   │
 │   ├── js/
-│   │   ├── entries/           # Vite entry points
-│   │   │   ├── pre.js        # Pre-bundle
-│   │   │   └── post.js       # Post-bundle
-│   │   └── app/              # Your JS code
+│   │   ├── entries/        # Vite entry points
+│   │   │   ├── pre.js     # Pre-load bundle
+│   │   │   └── post.js    # Post-load bundle
+│   │   └── app/           # Your application code
 │   │       ├── pre/
 │   │       ├── post/
-│   │       ├── services/
 │   │       └── vue/
+│   │           ├── app.js
+│   │           ├── components/
+│   │           ├── directives/
+│   │           ├── filters/
+│   │           └── services/
 │   │
-│   ├── css/                   # Compiled CSS 📦
-│   └── i/_svg/               # SVG files for sprites
+│   ├── f/                  # Fonts (.gitkeep)
+│   ├── i/_svg/            # SVG icons (.gitkeep)
+│   └── u/                 # Static uploads (.gitkeep)
 │
-├── index.html                 # Generated 📦
-└── about.html                 # Generated 📦
+├── dist/                   # Build output (ignored)
+├── index.html              # Generated (ignored)
+├── package.json
+├── vite.config.js
+└── .gitignore
 ```
 
 ## 🎨 Template System
 
-Uses **Handlebars** with master layout inheritance (like Nunjucks extends).
-
 ### Master Layout
 
-**`m/_templates/shared/layouts/master.hbs`** - HTML skeleton for all pages:
+`m/_templates/shared/layouts/master.hbs`:
 
 ```handlebars
 <!DOCTYPE html>
 <html lang="{{lang}}">
 <head>
     <title>{{pageTitle}} - {{siteName}}</title>
-    <link rel="stylesheet" href="/m/_scss/site.min.scss" />
-    <script type="module" src="/m/js/entries/pre.js"></script>
+    <link rel="stylesheet" href="{{cssPath}}" />
+    <script type="module" src="{{preJsPath}}"></script>
 </head>
 <body class="{{pageCssClass}}">
     {{> header}}
-    {{> menu}}
-    <main>{{{body}}}</main>
+    
+    <main class="main">
+        {{{body}}}
+    </main>
+
     {{> footer}}
-    <script type="module" src="/m/js/entries/post.js"></script>
+    
+    <script type="module" src="{{postJsPath}}"></script>
 </body>
 </html>
 ```
 
-### Page Templates
+### Creating Pages
 
-**`m/_templates/index.hbs`** - Just content + front-matter:
+**1. Create template:** `m/_templates/about.hbs`
 
 ```handlebars
 ---
-pageTitle: Homepage
-pageCssClass: homepage
+pageTitle: About Us
+pageCssClass: about-page
 lang: en
 ---
 
-<h1>Welcome to {{siteName}}!</h1>
-<p>Your page content here</p>
+<section class="hero">
+    <h1>About {{siteName}}</h1>
+    <p>Your content here</p>
+</section>
 ```
 
-**Automatically uses master.hbs layout!**
+**2. Build:**
 
-### Adding New Pages
+```bash
+npm run html:prod  # or npm run build
+```
 
-1. Create `m/_templates/yourpage.hbs`
-2. Add front-matter + content
-3. Run `npm run html` (or auto-builds with `npm run dev:watch`)
-4. Access at `/yourpage.html`
+**3. Done!** → `about.html` is automatically created and copied to `dist/`
 
-## 🚀 Features
+### Template Data
 
-✅ **Vite build system** - Lightning-fast HMR  
-✅ **Template inheritance** - Master layouts & partials  
-✅ **SCSS preprocessing** - Built-in Vite support  
-✅ **Multiple JS bundles** - pre.min.js & post.min.js  
-✅ **SVG sprites** - Automatic generation  
-✅ **Legacy browser support** - Polyfills included  
-✅ **Source maps** - For debugging  
-✅ **Auto-rebuild** - Templates regenerate on save  
-✅ **Git-friendly** - Generated files ignored  
+Edit `m/_templates/template-data.js`:
 
-## 📦 What's Included
+```javascript
+export default {
+  layout: {
+    siteName: 'My Website',
+    year: new Date().getFullYear(),
+    buildTime: new Date().toISOString(),
+    // Paths auto-switch between dev and production
+    cssPath: isProd ? './m/css/site.min.css' : '/m/_scss/site.min.scss',
+    preJsPath: isProd ? './m/js/pre.min.js' : '/m/js/entries/pre.js',
+    postJsPath: isProd ? './m/js/post.min.js' : '/m/js/entries/post.js',
+  },
+  
+  menu: {
+    menuItems: [
+      { label: 'Home', url: '/', active: true },
+    ],
+  },
+  
+  footer: {
+    author: 'Your Name',
+  },
+};
+```
 
-**JavaScript Libraries:**
+## 📦 Adding Libraries
+
+### Install Package
+
+```bash
+npm install package-name
+```
+
+### Import in Entry Files
+
+**For critical dependencies** → `m/js/entries/pre.js`:
+```javascript
+import Package from 'package-name';
+window.Package = Package;
+```
+
+**For UI enhancements** → `m/js/entries/post.js`:
+```javascript
+import Package from 'package-name';
+window.Package = Package;
+```
+
+### Current Libraries
+
+**Included:**
 - Bootstrap 5.3.8
 - Vue 3.5.25
 - Axios
@@ -169,163 +222,133 @@ lang: en
 **Build Tools:**
 - Vite 5.4.11
 - Handlebars 4.7.8
-- SASS 1.94.2
+- Sass 1.94.2
 
 ## 🎯 Output
 
-### JS Bundles (No Code Splitting)
-- `m/js/pre.min.js` - Bootstrap, Swiper, Vue, Axios + pre-scripts
-- `m/js/post.min.js` - Services, Vue app + post-scripts
+### Production Build (`dist/`)
 
-### HTML Files
-- `index.html` - Generated from `m/_templates/index.hbs`
-- `about.html` - Generated from `m/_templates/about.hbs`
-
-### CSS
-- `m/css/site.min.css` - Compiled SCSS
-
-### Static Assets
-- `m/f/` - Fonts (copied to dist)
-- `m/i/` - Images & favicons (copied to dist, excluding `_svg`)
-- `m/i/_svg/` - SVG source files (compiled to sprite, injected into HTML)
-- `m/u/` - User uploads (copied to dist)
-
-## 📦 Adding Third-Party Libraries
-
-### Decision Tree: pre.js vs post.js
-
-**Add to `m/js/entries/pre.js` if:**
-- ❗ Required for critical page functionality
-- ❗ Needed by other pre-loaded scripts
-- ❗ Framework/foundation (Vue, React, etc.)
-- ❗ Polyfills or essential utilities
-
-**Add to `m/js/entries/post.js` if:**
-- ✅ UI enhancement libraries (carousels, sliders, modals)
-- ✅ Not needed for initial page render
-- ✅ Can wait until DOM is ready
-- ✅ Interactive features
-
-### Example: Adding a New Library
-
-**1. Install the package:**
-```bash
-npm install chart.js
+```
+dist/
+├── index.html              # Your pages (auto-copied)
+├── m/
+│   ├── css/
+│   │   └── site.min.css   # Compiled SCSS
+│   ├── js/
+│   │   ├── pre.min.js     # Bootstrap, Vue, Swiper, Axios
+│   │   └── post.min.js    # Post-load scripts
+│   ├── f/                  # Fonts (copied)
+│   ├── i/                  # Images (copied, excluding _svg)
+│   └── u/                  # Uploads (copied)
 ```
 
-**2. Import in the appropriate entry file:**
+**Note:** `copy-to-dist.js` automatically finds and copies ALL `.html` files from root - no manual configuration needed!
 
-If it's a UI library (like Chart.js), add to **`m/js/entries/post.js`**:
-```javascript
-// Chart.js - for data visualization
-import Chart from 'chart.js/auto';
-window.Chart = Chart;
+## 🖼️ Using SVG Sprites
+
+**1. Add SVG files to** `m/i/_svg/`
+
+```
+m/i/_svg/
+├── symbol-heart.svg
+└── symbol-arrow.svg
 ```
 
-If it's critical (like a utility library), add to **`m/js/entries/pre.js`**:
-```javascript
-// Lodash - utility library
-import _ from 'lodash';
-window._ = _;
+**2. Use in templates:**
+
+```html
+<svg class="icon">
+    <use xlink:href="#icon-symbol-heart"></use>
+</svg>
 ```
 
-**3. Rebuild:**
+The `vite-plugin-svg-icons` automatically generates sprites and injects them into your HTML.
+
+## 🌐 Deployment
+
+Your production build uses **relative paths**, so it works in any directory:
+
 ```bash
 npm run build
 ```
 
-### Current Libraries
+Upload the entire `dist/` folder to:
+- ✅ Domain root: `example.com/`
+- ✅ Subdirectory: `example.com/mysite/`
+- ✅ Test servers
+- ✅ GitHub Pages
 
-**pre.js** (Critical dependencies):
-- Bootstrap, Swiper, Vue, Axios, SVG sprite system
+**No configuration needed!**
 
-**post.js** (Enhancement libraries):
-- None currently (ready for additions)
+## 🔧 Customization
 
-## 💡 Template Data
+### Using Menu Partial
 
-Edit **`m/_templates/template-data.js`** to customize data for your templates.
+The menu partial exists but isn't included by default. To use it:
 
-Data is **organized by component** - each section corresponds to where it's used:
+**Edit** `m/_templates/shared/layouts/master.hbs`:
 
-```javascript
-export default {
-  // Master layout data (master.hbs)
-  layout: {
-    siteName: 'My Website',
-    year: new Date().getFullYear(),
-  },
-  
-  // Menu component data (menu.hbs)
-  menu: {
-    menuItems: [
-      { label: 'Home', url: '/' },
-      { label: 'About', url: '/about.html' },
-    ],
-  },
-  
-  // Footer component data (footer.hbs)
-  footer: {
-    author: 'Your Name',
-  },
-};
+```handlebars
+<body class="{{pageCssClass}}">
+    {{> header}}
+    {{> menu}}  <!-- Add this line -->
+    
+    <main class="main">
+        {{{body}}}
+    </main>
+    ...
 ```
 
-**Data lives WITH your templates, not in build scripts!** 📍
+### SCSS Structure
 
-### Adding npm Packages
-
-```bash
-npm install package-name
+```
+m/_scss/
+├── abstracts/          # Variables, mixins, functions
+├── base/              # Base styles, typography, fonts
+├── components/        # Buttons, dropdowns, etc.
+├── layout/           # Header, footer, forms
+└── pages/            # Page-specific styles
 ```
 
-Import in `m/js/entries/pre.js` or `post.js`:
+### Vue Integration
 
-```javascript
-import Package from 'package-name';
-window.Package = Package; // Expose globally if needed
+The Vue structure is ready but empty:
+
 ```
-
-### SVG Sprites
-
-1. Add `.svg` files to `m/i/_svg/`
-2. Use in HTML:
-
-```html
-<svg><use xlink:href="#icon-filename"></use></svg>
+m/js/app/vue/
+├── app.js            # Main Vue app
+├── components/       # Vue components
+├── directives/       # Custom directives
+├── filters/          # Filters/composables
+└── services/         # API services
 ```
-
-## 🌐 Browser Support
-
-Targets: `> 0.25%, not dead`
-
-- Chrome, Firefox, Safari, Edge (last 2 versions)
-- Modern mobile browsers
 
 ## 🐛 Troubleshooting
 
+### Templates not updating
+
+```bash
+npm run html:prod
+```
+
 ### Build fails
+
 ```bash
-rm -rf node_modules
+rm -rf node_modules dist
 npm install
+npm run build
 ```
 
-### Templates not building
-```bash
-npm run html
-```
+### Paths not working
 
-### Verify build
-```bash
-npm run verify
-```
-
-### Dev server not starting
-Kill existing processes and restart:
-```bash
-npm run dev
-```
+- Development: Uses absolute paths (`/m/...`)
+- Production: Uses relative paths (`./m/...`)
+- Always use `npm run build` for deployment builds
 
 ## 📄 License
 
-See [LICENSE](./LICENSE) file for details.
+MIT License - See [LICENSE](./LICENSE) file for details.
+
+---
+
+**Built with ❤️ using Vite + Handlebars + SCSS**
