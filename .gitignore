@@ -4,17 +4,11 @@ bin
 obj
 .vs
 /m/_scss/_sprites.scss
-/m/css/site.min.css
 /m/js/post.min.js
 /m/js/post.min.js.map
 /m/js/pre.min.js
 /m/js/pre.min.js.map
 yarn.lock
-
-# Test/example files (not part of boilerplate)
-/m/f/*.woff
-/m/f/*.woff2
-/m/u/offers/
 
 # Vite
 .vite

@@ -39,8 +39,6 @@ export default {
   menu: {
     menuItems: [
       { label: 'Home', url: '/', active: true },
-      { label: 'About', url: '/about.html', active: false },
-      { label: 'Test', url: '/test.html', active: false },
     ],
   },
 

@@ -15,8 +15,7 @@
     "build": "npm run build:prod",
     "build:dev": "npm run html && vite build --mode development && npm run copy:dist",
     "build:prod": "npm run html:prod && vite build --mode production && npm run copy:dist",
-    "preview": "vite preview",
-    "verify": "node build-tools/verify-vite-build.js"
+    "preview": "vite preview"
   },
   "author": "",
   "license": "ISC",
